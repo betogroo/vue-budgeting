@@ -1,9 +1,17 @@
 const useHelpers = () => {
   const fetchData = (key: string) => {
-    return JSON.parse(localStorage.getItem(key) || '{}')
+    if (localStorage.getItem(key)) {
+      return localStorage.getItem(key)
+    } else {
+      return null
+    }
   }
 
-  return { fetchData }
+  const deleteItem = (key: string) => {
+    return localStorage.removeItem(key)
+  }
+
+  return { fetchData, deleteItem }
 }
 
 export default useHelpers
