@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { AppBar, AppSnackbar } from '@/shared/components'
-import { useHelpers } from '@/shared/composables'
-const { fetchData } = useHelpers()
-const userName = fetchData('userName')
+import { useUser } from '@/modules/main/composables'
+const { fetchUser, userName } = useUser()
+fetchUser()
+//import { useHelpers } from '@/shared/composables'
+//const { fetchData } = useHelpers()
+// const userName = fetchData('userName')
 </script>
 <template>
   <v-app>
