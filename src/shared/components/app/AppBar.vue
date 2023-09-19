@@ -19,7 +19,6 @@ defineProps<Props>()
       v-if="userName"
       color="error"
       prepend-icon="mdi-account-remove"
-      :to="{ name: 'LogoutView' }"
       variant="outlined"
       >Delete User</v-btn
     >
