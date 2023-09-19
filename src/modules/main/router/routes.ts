@@ -21,15 +21,6 @@ const routes: CustomRouteRecordRaw[] = [
     },
   },
   {
-    path: '/logout',
-    component: () => import('../views/LogoutView.vue'),
-    name: 'LogoutView',
-    meta: {
-      title: 'Logout',
-      requiresAuth: false,
-    },
-  },
-  {
     path: '/:catchAll(.*)',
     name: 'NotFound',
     component: () => import('../views/NotFound.vue'),
