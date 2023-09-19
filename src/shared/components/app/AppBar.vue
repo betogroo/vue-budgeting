@@ -1,8 +1,16 @@
 <script setup lang="ts">
 interface Props {
   userName: string | null
+  isPending: boolean
 }
 defineProps<Props>()
+
+const $emit = defineEmits<{
+  logout: []
+}>()
+const logout = () => {
+  $emit('logout')
+}
 </script>
 <template>
   <v-app-bar density="compact">
@@ -18,8 +26,10 @@ defineProps<Props>()
     <v-btn
       v-if="userName"
       color="error"
+      :loading="isPending"
       prepend-icon="mdi-account-remove"
       variant="outlined"
+      @click="logout"
       >Delete User</v-btn
     >
   </v-app-bar>
