@@ -1,2 +1,2 @@
-import useUser from './useUser'
-export { useUser }
+import useMain from './useMain'
+export { useMain }

@@ -8,7 +8,7 @@ interface Snackbar {
   timeout?: number | string
 }
 
-export const useSharedSore = defineStore('main', () => {
+export const useSharedSore = defineStore('shared', () => {
   const snackbar = ref<Snackbar>({
     text: 'Snackbar',
     isActive: false,

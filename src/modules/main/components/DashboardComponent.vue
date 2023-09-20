@@ -6,6 +6,9 @@ defineProps<Props>()
 </script>
 
 <template>
-  <h1>{{ userName ? userName : '' }}</h1>
-  <div>Dashboard</div>
+  <h1 class="text-left mb-2">
+    Seja bem vindo de volta,<span class="text-blue text-uppercase">
+      {{ ' ' + userName }}</span
+    >
+  </h1>
 </template>

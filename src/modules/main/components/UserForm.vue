@@ -1,19 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useUser } from '../composables'
-import { useSharedSore } from '@/shared/store'
-const { login, isPending } = useUser()
-const store = useSharedSore()
-const { enableSnackbar, disableSnackbar } = store
+import useMain from '../composables/useMain'
 
 const formData = ref<{ userName: string }>({
   userName: '',
 })
 
-const handleSubmit = () => {
-  login(formData.value.userName).then(() => {
-    console.log('Deu certo')
-  })
+const { login, isPending } = useMain()
+
+const handleSubmit = async () => {
+  await login(formData.value.userName)
 }
 </script>
 
@@ -33,6 +29,7 @@ const handleSubmit = () => {
     <v-btn
       append-icon="mdi-account-plus"
       color="black"
+      :disabled="formData.userName.length < 1"
       :loading="isPending"
       type="submit"
       >Criar conta</v-btn

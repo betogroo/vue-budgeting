@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import { AppBar, AppSnackbar } from '@/shared/components'
-import { useUser } from '@/modules/main/composables'
-const { userName, fetchUser, logout, isPending } = useUser()
-fetchUser()
+import useMain from './modules/main/composables/useMain'
+const { userName, logout, isPending } = useMain()
+
 const handleLogout = () => {
   logout()
 }
-//import { useHelpers } from '@/shared/composables'
-//const { fetchData } = useHelpers()
-// const userName = fetchData('userName')
 </script>
 <template>
   <v-app>
@@ -19,7 +16,10 @@ const handleLogout = () => {
     />
     <AppSnackbar />
     <v-main>
-      <RouterView />
+      <Suspense>
+        <RouterView />
+        <template #fallback> Carregnado ... </template>
+      </Suspense>
     </v-main>
   </v-app>
 </template>
