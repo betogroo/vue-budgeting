@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { useHelpers } from '@/shared/composables'
 import { DashboardComponent, IntroComponent } from '../components'
-const { fetchData } = useHelpers()
-const userName = fetchData('userName')
+
+import useTest from '../composables/useTest'
+const { userName, fetchUser } = useTest()
+fetchUser()
 </script>
 <template>
   <v-container class="d-flex justify-center fill-height">
