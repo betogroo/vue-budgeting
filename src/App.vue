@@ -1,17 +1,11 @@
 <script setup lang="ts">
 import { AppBar, AppSnackbar } from '@/shared/components'
-import useUser from './modules/main/composables/useUser'
-const { userName, fetchUser, logout, isPending } = useUser()
-fetchUser()
+import useMain from './modules/main/composables/useMain'
+const { userName, logout, isPending } = useMain()
 
-//const { logout, isPending } = useUser()
 const handleLogout = () => {
-  console.log('test')
   logout()
 }
-//import { useHelpers } from '@/shared/composables'
-//const { fetchData } = useHelpers()
-// const userName = fetchData('userName')
 </script>
 <template>
   <v-app>

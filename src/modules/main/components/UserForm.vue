@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import useUser from '../composables/useUser'
+import useMain from '../composables/useMain'
 
 const formData = ref<{ userName: string }>({
   userName: '',
 })
 
-const { login, isPending } = useUser()
+const { login, isPending } = useMain()
 
 const handleSubmit = async () => {
   await login(formData.value.userName)

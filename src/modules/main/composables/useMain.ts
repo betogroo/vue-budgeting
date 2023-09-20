@@ -6,13 +6,28 @@ import { storeToRefs } from 'pinia'
 const error = ref()
 const isPending = ref(false)
 
-const useUser = () => {
+const useMain = () => {
   const mainStore = useMainStore()
-  const { userName } = storeToRefs(mainStore)
-  const { getUser, deleteUser, addUser } = mainStore
+  const { userName, budget } = storeToRefs(mainStore)
+  const { getUser, deleteUser, addUser, getBudget } = mainStore
 
   const sharedStore = useSharedSore()
   const { enableSnackbar, disableSnackbar } = sharedStore
+
+  const loadDashboard = async () => {
+    try {
+      error.value = null
+      isPending.value = true
+      getUser()
+      getBudget()
+    } catch (err) {
+      const e = err as Error
+      error.value = e.message
+      console.log(e)
+    } finally {
+      isPending.value = false
+    }
+  }
 
   const fetchUser = async () => {
     try {
@@ -58,7 +73,15 @@ const useUser = () => {
     }
   }
 
-  return { userName, fetchUser, logout, login, isPending }
+  return {
+    userName,
+    budget,
+    fetchUser,
+    logout,
+    login,
+    loadDashboard,
+    isPending,
+  }
 }
 
-export default useUser
+export default useMain
