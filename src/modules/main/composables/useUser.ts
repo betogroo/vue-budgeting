@@ -11,6 +11,22 @@ const useUser = () => {
     userName.value = fetchData('userName')
   }
 
+  const login = async (userName: string) => {
+    try {
+      isPending.value = true
+      localStorage.setItem('userName', userName)
+      await delay(1000)
+      enableSnackbar('Logout feito com sucesso')
+      await delay()
+      disableSnackbar()
+    } catch (err) {
+      const e = err as Error
+      console.log(e)
+    } finally {
+      isPending.value = false
+    }
+  }
+
   const logout = async () => {
     isPending.value = true
     deleteItem('userName')
@@ -22,7 +38,7 @@ const useUser = () => {
     disableSnackbar()
   }
 
-  return { userName, fetchUser, logout, isPending }
+  return { userName, fetchUser, logout, login, isPending }
 }
 
 export default useUser

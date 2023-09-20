@@ -13,7 +13,10 @@ const logout = () => {
 }
 </script>
 <template>
-  <v-app-bar density="compact">
+  <v-app-bar
+    density="compact"
+    elevation="0"
+  >
     <v-app-bar-title>
       <RouterLink
         class="text-black text-decoration-none"
