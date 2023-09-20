@@ -1,7 +1,7 @@
 // Utilities
 import { defineStore } from 'pinia'
 import { useHelpers } from '@/shared/composables'
-const { fetchData } = useHelpers()
+const { fetchData, deleteItem } = useHelpers()
 import { ref } from 'vue'
 
 export const useMainStore = defineStore('main', () => {
@@ -11,5 +11,10 @@ export const useMainStore = defineStore('main', () => {
     const user = fetchData('userName')
     userName.value = user
   }
-  return { userName, getUser }
+
+  const deleteUser = () => {
+    deleteItem('userName')
+    userName.value = null
+  }
+  return { userName, getUser, deleteUser }
 })

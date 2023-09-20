@@ -4,12 +4,16 @@ import { storeToRefs } from 'pinia'
 const useTest = () => {
   const store = useMainStore()
   const { userName } = storeToRefs(store)
-  const { getUser } = store
+  const { getUser, deleteUser } = store
   const fetchUser = () => {
     getUser()
   }
 
-  return { userName, fetchUser }
+  const logout = () => {
+    deleteUser()
+  }
+
+  return { userName, fetchUser, logout }
 }
 
 export default useTest
