@@ -51,6 +51,7 @@ const useUser = () => {
     } catch (err) {
       const e = err as Error
       error.value = e.message
+      enableSnackbar(e.message)
       console.log(e)
     } finally {
       isPending.value = false

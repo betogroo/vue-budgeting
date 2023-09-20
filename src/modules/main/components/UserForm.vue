@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import useUser from '../composables/useUser'
-import { useSharedSore } from '@/shared/store'
-const store = useSharedSore()
-const { enableSnackbar, disableSnackbar } = store
 
 const formData = ref<{ userName: string }>({
   userName: '',
@@ -12,9 +9,7 @@ const formData = ref<{ userName: string }>({
 const { login, isPending } = useUser()
 
 const handleSubmit = async () => {
-  await login(formData.value.userName).then(() => {
-    console.log('Deu certo')
-  })
+  await login(formData.value.userName)
 }
 </script>
 
@@ -34,6 +29,7 @@ const handleSubmit = async () => {
     <v-btn
       append-icon="mdi-account-plus"
       color="black"
+      :disabled="formData.userName.length < 1"
       :loading="isPending"
       type="submit"
       >Criar conta</v-btn
