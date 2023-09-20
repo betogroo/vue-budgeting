@@ -1,20 +1,27 @@
 // Utilities
 import { defineStore } from 'pinia'
 import { useHelpers } from '@/shared/composables'
-const { fetchData, deleteItem } = useHelpers()
+const { fetchData, deleteItem, delay } = useHelpers()
 import { ref } from 'vue'
 
 export const useMainStore = defineStore('main', () => {
   const userName = ref<string | null>(null)
 
-  const getUser = () => {
+  const getUser = async () => {
     const user = fetchData('userName')
     userName.value = user
   }
 
-  const deleteUser = () => {
+  const deleteUser = async () => {
+    await delay()
     deleteItem('userName')
     userName.value = null
   }
-  return { userName, getUser, deleteUser }
+
+  const addUser = async (data: string) => {
+    await delay()
+    localStorage.setItem('userName', data)
+    userName.value = data
+  }
+  return { userName, getUser, deleteUser, addUser }
 })

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { DashboardComponent, IntroComponent } from '../components'
 
-import useTest from '../composables/useTest'
-const { userName, fetchUser } = useTest()
+import useUser from '../composables/useUser'
+const { userName, fetchUser } = useUser()
 fetchUser()
 </script>
 <template>

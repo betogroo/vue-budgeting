@@ -1,26 +1,27 @@
 import { ref } from 'vue'
+import { useMainStore } from '../store/useMainStore'
 import { useSharedSore } from '@/shared/store'
-import { useHelpers } from '@/shared/composables'
-const { fetchData, deleteItem, delay } = useHelpers()
+import { storeToRefs } from 'pinia'
+
+const error = ref()
 const isPending = ref(false)
 
-const userName = ref<string | null>(null)
 const useUser = () => {
-  const { enableSnackbar, disableSnackbar } = useSharedSore()
-  const fetchUser = () => {
-    userName.value = fetchData('userName')
-  }
+  const mainStore = useMainStore()
+  const { userName } = storeToRefs(mainStore)
+  const { getUser, deleteUser, addUser } = mainStore
 
-  const login = async (userName: string) => {
+  const sharedStore = useSharedSore()
+  const { enableSnackbar, disableSnackbar } = sharedStore
+
+  const fetchUser = async () => {
     try {
+      error.value = null
       isPending.value = true
-      localStorage.setItem('userName', userName)
-      await delay(1000)
-      enableSnackbar('Logout feito com sucesso')
-      await delay()
-      disableSnackbar()
+      getUser()
     } catch (err) {
       const e = err as Error
+      error.value = e.message
       console.log(e)
     } finally {
       isPending.value = false
@@ -28,14 +29,32 @@ const useUser = () => {
   }
 
   const logout = async () => {
-    isPending.value = true
-    deleteItem('userName')
-    await delay()
-    isPending.value = false
-    userName.value = null
-    enableSnackbar('Logout feito com sucesso')
-    await delay(2000)
-    disableSnackbar()
+    try {
+      error.value = null
+      isPending.value = true
+      await deleteUser()
+      enableSnackbar('Logout feito com sucesso!')
+    } catch (err) {
+      const e = err as Error
+      error.value = e.message
+      console.log(e)
+    } finally {
+      isPending.value = false
+    }
+  }
+
+  const login = async (data: string) => {
+    try {
+      error.value = null
+      isPending.value = true
+      await addUser(data)
+    } catch (err) {
+      const e = err as Error
+      error.value = e.message
+      console.log(e)
+    } finally {
+      isPending.value = false
+    }
   }
 
   return { userName, fetchUser, logout, login, isPending }

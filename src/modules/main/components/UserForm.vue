@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useUser } from '../composables'
+import useUser from '../composables/useUser'
 import { useSharedSore } from '@/shared/store'
-const { login, isPending } = useUser()
 const store = useSharedSore()
 const { enableSnackbar, disableSnackbar } = store
 
@@ -10,8 +9,10 @@ const formData = ref<{ userName: string }>({
   userName: '',
 })
 
-const handleSubmit = () => {
-  login(formData.value.userName).then(() => {
+const { login, isPending } = useUser()
+
+const handleSubmit = async () => {
+  await login(formData.value.userName).then(() => {
     console.log('Deu certo')
   })
 }

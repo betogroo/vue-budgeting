@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { AppBar, AppSnackbar } from '@/shared/components'
-import useTest from './modules/main/composables/useTest'
-const { userName, fetchUser, logout } = useTest()
+import useUser from './modules/main/composables/useUser'
+const { userName, fetchUser, logout, isPending } = useUser()
 fetchUser()
 
 //const { logout, isPending } = useUser()
@@ -16,13 +16,16 @@ const handleLogout = () => {
 <template>
   <v-app>
     <AppBar
-      :is-pending="false"
+      :is-pending="isPending"
       :user-name="userName"
       @logout="handleLogout"
     />
     <AppSnackbar />
     <v-main>
-      <RouterView />
+      <Suspense>
+        <RouterView />
+        <template #fallback> Carregnado ... </template>
+      </Suspense>
     </v-main>
   </v-app>
 </template>
