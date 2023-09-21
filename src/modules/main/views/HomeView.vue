@@ -3,6 +3,7 @@ import {
   DashboardComponent,
   IntroComponent,
   BudgetComponent,
+  BudgetForm,
 } from '../components'
 
 import useMain from '../composables/useMain'
@@ -20,7 +21,7 @@ loadDashboard()
         <template v-if="budget">
           <BudgetComponent :budget="budget" />
         </template>
-        <template v-else> Formulário Do Budget </template>
+        <template v-else> <BudgetForm /></template>
       </template>
       <IntroComponent v-else />
     </v-responsive>
