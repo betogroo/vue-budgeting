@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useMain } from '../composables'
+import type { Budget } from '../types'
+const { addBudget, isPending } = useMain()
 
-interface Budget {
-  name: string
-  amount: number
-}
 const formData = ref<Budget>({
   name: '',
   amount: Number(''),
 })
 
 const handleSubmit = () => {
-  console.log(formData.value)
+  addBudget(formData.value)
 }
 </script>
 
@@ -70,6 +69,7 @@ const handleSubmit = () => {
               class="text-right"
               color="black"
               :disabled="!formData.name || !formData.amount ? true : false"
+              :loading="isPending"
               type="submit"
               >Cadastrar</v-btn
             >
