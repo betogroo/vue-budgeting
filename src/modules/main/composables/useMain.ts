@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import { useMainStore } from '../store/useMainStore'
 import { useSharedSore } from '@/shared/store'
 import { storeToRefs } from 'pinia'
+import type { Budget } from '../types'
 
 const error = ref()
 const isPending = ref(false)
@@ -9,7 +10,13 @@ const isPending = ref(false)
 const useMain = () => {
   const mainStore = useMainStore()
   const { userName, budget } = storeToRefs(mainStore)
-  const { getUser, deleteUser, addUser, getBudget } = mainStore
+  const {
+    getUser,
+    deleteUser,
+    addUser,
+    getBudget,
+    addBudget: _addBudget,
+  } = mainStore
 
   const sharedStore = useSharedSore()
   const { enableSnackbar } = sharedStore
@@ -73,14 +80,34 @@ const useMain = () => {
     }
   }
 
+  const addBudget = async (data: Budget) => {
+    try {
+      error.value = null
+      isPending.value = true
+      const budget: Budget = {
+        name: data.name,
+        amount: data.amount,
+      }
+      await _addBudget(budget)
+    } catch (err) {
+      const e = err as Error
+      error.value = e.message
+      enableSnackbar(e.message)
+      console.log(e)
+    } finally {
+      isPending.value = false
+    }
+  }
+
   return {
     userName,
     budget,
+    isPending,
     fetchUser,
     logout,
     login,
     loadDashboard,
-    isPending,
+    addBudget,
   }
 }
 
