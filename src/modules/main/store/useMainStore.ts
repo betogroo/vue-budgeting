@@ -34,7 +34,11 @@ export const useMainStore = defineStore('main', () => {
 
   const addBudget = async (data: Budget) => {
     await delay()
-    budget.value = { id: crypto.randomUUID(), ...data }
+    budget.value = {
+      id: crypto.randomUUID(),
+      createdAt: Date.now().toString(),
+      ...data,
+    }
     localStorage.setItem('budget', JSON.stringify(budget.value))
   }
   return {
