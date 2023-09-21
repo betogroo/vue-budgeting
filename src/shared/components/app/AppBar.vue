@@ -3,11 +3,12 @@ interface Props {
   userName: string | null
   isPending: boolean
 }
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const $emit = defineEmits<{
   logout: []
 }>()
+
 const logout = () => {
   $emit('logout')
 }
@@ -33,7 +34,7 @@ const logout = () => {
       prepend-icon="mdi-account-remove"
       variant="outlined"
       @click="logout"
-      >Delete User</v-btn
+      >Delete User {{ userName }}</v-btn
     >
   </v-app-bar>
 </template>

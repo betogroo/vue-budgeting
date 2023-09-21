@@ -11,7 +11,7 @@ const handleLogout = () => {
   <v-app>
     <AppBar
       :is-pending="isPending"
-      :user-name="String(userName)"
+      :user-name="userName"
       @logout="handleLogout"
     />
     <AppSnackbar />
