@@ -1,9 +1,9 @@
 <script setup lang="ts">
 interface Props {
   userName: string | null
-  isPending: boolean
+  isPending: boolean | string
 }
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const $emit = defineEmits<{
   logout: []
@@ -30,11 +30,11 @@ const logout = () => {
     <v-btn
       v-if="userName"
       color="error"
-      :loading="isPending"
+      :loading="isPending === 'logout'"
       prepend-icon="mdi-account-remove"
       variant="outlined"
       @click="logout"
-      >Delete User {{ userName }}</v-btn
+      >Delete User</v-btn
     >
   </v-app-bar>
 </template>

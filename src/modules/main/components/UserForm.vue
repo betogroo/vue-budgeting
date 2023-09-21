@@ -30,7 +30,7 @@ const handleSubmit = async () => {
       append-icon="mdi-account-plus"
       color="black"
       :disabled="formData.userName.length < 1"
-      :loading="isPending"
+      :loading="isPending === 'login'"
       type="submit"
       >Criar conta</v-btn
     >
