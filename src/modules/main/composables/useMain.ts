@@ -12,7 +12,7 @@ const useMain = () => {
   const { getUser, deleteUser, addUser, getBudget } = mainStore
 
   const sharedStore = useSharedSore()
-  const { enableSnackbar, disableSnackbar } = sharedStore
+  const { enableSnackbar } = sharedStore
 
   const loadDashboard = async () => {
     try {
