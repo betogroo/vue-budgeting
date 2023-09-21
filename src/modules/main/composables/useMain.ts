@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia'
 import type { Budget } from '../types'
 
 const error = ref()
-const isPending = ref(false)
+const isPending = ref<boolean | string>(false)
 
 const useMain = () => {
   const mainStore = useMainStore()
@@ -53,7 +53,7 @@ const useMain = () => {
   const logout = async () => {
     try {
       error.value = null
-      isPending.value = true
+      isPending.value = 'logout'
       await deleteUser()
       enableSnackbar('Logout feito com sucesso!')
     } catch (err) {
@@ -68,7 +68,7 @@ const useMain = () => {
   const login = async (data: string) => {
     try {
       error.value = null
-      isPending.value = true
+      isPending.value = 'login'
       await addUser(data)
     } catch (err) {
       const e = err as Error
@@ -83,7 +83,7 @@ const useMain = () => {
   const addBudget = async (data: Budget) => {
     try {
       error.value = null
-      isPending.value = true
+      isPending.value = 'addBudget'
       const budget: Budget = {
         name: data.name,
         amount: data.amount,

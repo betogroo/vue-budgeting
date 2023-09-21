@@ -69,7 +69,7 @@ const handleSubmit = () => {
               class="text-right"
               color="black"
               :disabled="!formData.name || !formData.amount ? true : false"
-              :loading="isPending"
+              :loading="isPending === 'addBudget'"
               type="submit"
               >Cadastrar</v-btn
             >
