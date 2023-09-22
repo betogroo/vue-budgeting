@@ -1,16 +1,24 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useMain } from '../composables'
-import type { Budget } from '../types'
+import type { BudgetFormData } from '../types'
 const { addBudget, isPending } = useMain()
 
-const formData = ref<Budget>({
+const formData = ref<BudgetFormData>({
   name: '',
-  amount: Number(''),
+  amount: +'',
 })
 
-const handleSubmit = () => {
-  addBudget(formData.value)
+const name = ref()
+
+const handleSubmit = async () => {
+  await addBudget(formData.value).then(() => {
+    formData.value = {
+      name: '',
+      amount: +'',
+    }
+    name.value.focus()
+  })
 }
 </script>
 
@@ -33,6 +41,7 @@ const handleSubmit = () => {
         >
           <v-col>
             <v-text-field
+              ref="name"
               v-model="formData.name"
               density="compact"
               hide-details

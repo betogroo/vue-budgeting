@@ -1,8 +1,8 @@
 // Utilities
 import { defineStore } from 'pinia'
 import { useHelpers } from '@/shared/composables'
-import type { Budget } from '../types'
-const { fetchData, deleteItem, delay } = useHelpers()
+import type { Budget, BudgetFormData } from '../types'
+const { fetchData, deleteItem, delay, generateRandomColor } = useHelpers()
 import { ref } from 'vue'
 
 export const useMainStore = defineStore('main', () => {
@@ -30,11 +30,12 @@ export const useMainStore = defineStore('main', () => {
     userName.value = data
   }
 
-  const addBudget = async (data: Budget) => {
+  const addBudget = async (data: BudgetFormData) => {
     await delay()
     const newValue = {
       id: crypto.randomUUID(),
       createdAt: Date.now().toString(),
+      color: generateRandomColor(),
       ...data,
     }
     budgets.value.push(newValue)

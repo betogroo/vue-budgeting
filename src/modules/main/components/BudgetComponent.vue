@@ -10,7 +10,10 @@ const { budget } = toRefs(props)
 </script>
 
 <template>
-  <v-list-item :value="budget.id">
+  <v-list-item
+    :base-color="budget.color"
+    :value="budget.id"
+  >
     <template v-slot:prepend="{ isActive }">
       <v-list-item-action start>
         <v-checkbox-btn :model-value="isActive"></v-checkbox-btn>
