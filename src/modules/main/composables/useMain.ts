@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { useMainStore } from '../store/useMainStore'
 import { useSharedSore } from '@/shared/store'
 import { storeToRefs } from 'pinia'
-import type { Budget } from '../types'
+import type { BudgetFormData } from '../types'
 
 const error = ref()
 const isPending = ref<boolean | string>(false)
@@ -80,11 +80,11 @@ const useMain = () => {
     }
   }
 
-  const addBudget = async (data: Budget) => {
+  const addBudget = async (data: BudgetFormData) => {
     try {
       error.value = null
       isPending.value = 'addBudget'
-      const budget: Budget = {
+      const budget: BudgetFormData = {
         name: data.name,
         amount: data.amount,
       }

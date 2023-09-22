@@ -5,3 +5,5 @@ export interface Budget {
   createdAt?: string
   color?: string
 }
+
+type BudgetFormData = Pick<Budget, 'name' | 'amount'>
