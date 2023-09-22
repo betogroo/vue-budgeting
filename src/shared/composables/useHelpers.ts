@@ -21,7 +21,12 @@ const useHelpers = () => {
     return new Promise((resolve) => setTimeout(resolve, amount))
   }
 
-  return { fetchData, existingData, deleteItem, delay }
+  const generateRandomColor = () => {
+    const countBudgets = fetchData('budgets')?.length ?? 0
+    return `${countBudgets * 34}, 65%, 50%`
+  }
+
+  return { fetchData, existingData, deleteItem, delay, generateRandomColor }
 }
 
 export default useHelpers

@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia'
 import { useHelpers } from '@/shared/composables'
 import type { Budget } from '../types'
-const { fetchData, deleteItem, delay } = useHelpers()
+const { fetchData, deleteItem, delay, generateRandomColor } = useHelpers()
 import { ref } from 'vue'
 
 export const useMainStore = defineStore('main', () => {
@@ -35,6 +35,7 @@ export const useMainStore = defineStore('main', () => {
     const newValue = {
       id: crypto.randomUUID(),
       createdAt: Date.now().toString(),
+      color: generateRandomColor(),
       ...data,
     }
     budgets.value.push(newValue)
