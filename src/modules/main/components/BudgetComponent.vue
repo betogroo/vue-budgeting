@@ -10,7 +10,18 @@ const { budget } = toRefs(props)
 </script>
 
 <template>
-  <div class="text-h3">Orçamento: {{ budget.name }}</div>
-  <div class="text-h3">Verba: {{ budget.amount }}</div>
-  <div></div>
+  <v-list-item :value="budget.id">
+    <template v-slot:prepend="{ isActive }">
+      <v-list-item-action start>
+        <v-checkbox-btn :model-value="isActive"></v-checkbox-btn>
+      </v-list-item-action>
+    </template>
+
+    <v-list-item-title>{{ budget.name }}</v-list-item-title>
+
+    <v-row>
+      <v-col>{{ budget.amount }}</v-col>
+      <v-col>{{ budget.createdAt }}</v-col>
+    </v-row>
+  </v-list-item>
 </template>

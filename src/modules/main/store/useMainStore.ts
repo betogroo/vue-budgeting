@@ -7,17 +7,15 @@ import { ref } from 'vue'
 
 export const useMainStore = defineStore('main', () => {
   const userName = ref<string | null>(null)
-  const budget = ref<Budget | null>(null)
+  const budgets = ref<Budget[]>([])
 
   const getUser = async () => {
     const data = fetchData('userName')
-    console.log(data)
-    userName.value = data
+    if (data) userName.value = data
   }
   const getBudget = async () => {
-    const data = fetchData('budget')
-    console.log(data)
-    budget.value = data
+    const data = fetchData('budgets')
+    if (data) budgets.value = data
   }
 
   const deleteUser = async () => {
@@ -34,16 +32,17 @@ export const useMainStore = defineStore('main', () => {
 
   const addBudget = async (data: Budget) => {
     await delay()
-    budget.value = {
+    const newValue = {
       id: crypto.randomUUID(),
       createdAt: Date.now().toString(),
       ...data,
     }
-    localStorage.setItem('budget', JSON.stringify(budget.value))
+    budgets.value.push(newValue)
+    localStorage.setItem('budgets', JSON.stringify(budgets.value))
   }
   return {
     userName,
-    budget,
+    budgets,
     getUser,
     getBudget,
     deleteUser,
