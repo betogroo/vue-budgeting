@@ -21,7 +21,7 @@ loadDashboard()
         <template v-if="budget">
           <BudgetComponent :budget="budget" />
         </template>
-        <template v-else> <BudgetForm /></template>
+        <BudgetForm />
       </template>
       <IntroComponent v-else />
     </v-responsive>
