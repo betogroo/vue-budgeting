@@ -5,6 +5,11 @@ const useHelpers = () => {
     return data
   }
 
+  const existingData = (key: string) => {
+    const data = fetchData(key)
+    return data
+  }
+
   const deleteItem = (key: string) => {
     return localStorage.removeItem(key)
   }
@@ -16,7 +21,7 @@ const useHelpers = () => {
     return new Promise((resolve) => setTimeout(resolve, amount))
   }
 
-  return { fetchData, deleteItem, delay }
+  return { fetchData, existingData, deleteItem, delay }
 }
 
 export default useHelpers
