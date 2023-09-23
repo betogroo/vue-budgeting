@@ -15,7 +15,13 @@ loadDashboard()
     <v-responsive class="text-center">
       <template v-if="userName && Object.keys(userName).length">
         <DashboardComponent :user-name="userName" />
-        <v-list v-if="budgets">
+        <div v-if="!budgets.length">
+          <p class="text-justify">
+            Orçamento pessoal é o segredo para a liberdade financeira.
+          </p>
+          <p class="text-justify">Crie seu orçamento agora</p>
+        </div>
+        <v-list v-if="budgets.length">
           <BudgetComponent
             v-for="item in budgets"
             :key="item.id"
