@@ -1,13 +1,14 @@
 // Utilities
 import { defineStore } from 'pinia'
 import { useHelpers } from '@/shared/composables'
-import type { Budget, BudgetFormData } from '../types'
+import type { Budget, BudgetFormData, Expense, ExpenseFormData } from '../types'
 const { fetchData, deleteItem, delay, generateRandomColor } = useHelpers()
 import { ref } from 'vue'
 
 export const useMainStore = defineStore('main', () => {
   const userName = ref<string | null>(null)
   const budgets = ref<Budget[]>([])
+  const expenses = ref<Expense[]>([])
 
   const getUser = async () => {
     const data = fetchData('userName')
@@ -16,6 +17,10 @@ export const useMainStore = defineStore('main', () => {
   const getBudget = async () => {
     const data = fetchData('budgets')
     if (data) budgets.value = data
+  }
+  const getExpenses = async () => {
+    const data = fetchData('expenses')
+    if (data) expenses.value = data
   }
 
   const deleteUser = async () => {
@@ -41,13 +46,26 @@ export const useMainStore = defineStore('main', () => {
     budgets.value.push(newValue)
     localStorage.setItem('budgets', JSON.stringify(budgets.value))
   }
+  const addExpense = async (data: ExpenseFormData) => {
+    await delay()
+    const newValue = {
+      id: crypto.randomUUID(),
+      createdAt: Date.now().toString(),
+      ...data,
+    }
+    expenses.value.push(newValue)
+    localStorage.setItem('expenses', JSON.stringify(expenses.value))
+  }
   return {
     userName,
     budgets,
+    expenses,
     getUser,
     getBudget,
+    getExpenses,
     deleteUser,
     addUser,
     addBudget,
+    addExpense,
   }
 })

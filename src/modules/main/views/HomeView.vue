@@ -2,8 +2,8 @@
 import {
   DashboardComponent,
   IntroComponent,
-  BudgetComponent,
   BudgetForm,
+  ExpenseForm,
 } from '../components'
 // {"id":"9ba6e70d-de33-4ecb-9b4a-b1005bf93735","name":"Doce","amount":250}
 import useMain from '../composables/useMain'
@@ -21,14 +21,12 @@ loadDashboard()
           </p>
           <p class="text-justify">Crie seu orçamento agora</p>
         </div>
-        <v-list v-if="budgets.length">
-          <BudgetComponent
-            v-for="item in budgets"
-            :key="item.id"
-            :budget="item"
-          />
-        </v-list>
+
         <BudgetForm />
+        <ExpenseForm
+          v-if="budgets.length"
+          :budgets="budgets"
+        />
       </template>
       <IntroComponent v-else />
     </v-responsive>
