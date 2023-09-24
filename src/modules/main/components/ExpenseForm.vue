@@ -79,7 +79,6 @@ const handleSubmit = async () => {
               variant="outlined"
             ></v-text-field>
           </v-col>
-
           <v-col>
             <v-text-field
               v-model.number="formData.amount"
@@ -92,12 +91,7 @@ const handleSubmit = async () => {
               variant="outlined"
             ></v-text-field>
           </v-col>
-        </v-row>
-        <v-row
-          class="my-3"
-          no-gutters
-        >
-          <v-col>
+          <v-col cols="12">
             <v-select
               v-if="budgets.length > 1"
               v-model="formData.budget_id"

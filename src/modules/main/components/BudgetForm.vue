@@ -39,7 +39,10 @@ const handleSubmit = async () => {
           class="my-3"
           no-gutters
         >
-          <v-col>
+          <v-col
+            class="mb-3"
+            cols="12"
+          >
             <v-text-field
               ref="name"
               v-model="formData.name"
@@ -50,12 +53,7 @@ const handleSubmit = async () => {
               variant="outlined"
             ></v-text-field>
           </v-col>
-        </v-row>
-        <v-row
-          class="my-3"
-          no-gutters
-        >
-          <v-col>
+          <v-col cols="12">
             <v-text-field
               v-model.number="formData.amount"
               density="compact"
