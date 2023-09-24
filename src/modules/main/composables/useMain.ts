@@ -27,9 +27,9 @@ const useMain = () => {
     try {
       error.value = null
       isPending.value = true
-      getUser()
-      getBudget()
-      getExpenses()
+      await getUser()
+      await getBudget()
+      await getExpenses()
     } catch (err) {
       const e = err as Error
       error.value = e.message

@@ -24,7 +24,7 @@ const handleSubmit = async () => {
 
 <template>
   <v-sheet
-    class="rounded-lg pa-2"
+    class="rounded-lg pa-1"
     style="border: 2px dotted"
   >
     <v-sheet class="pa-1">
