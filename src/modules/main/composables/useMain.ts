@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { useMainStore } from '../store/useMainStore'
 import { useSharedSore } from '@/shared/store'
 import { storeToRefs } from 'pinia'
-import type { BudgetFormData } from '../types'
+import type { BudgetFormData, ExpenseFormData } from '../types'
 
 const error = ref()
 const isPending = ref<boolean | string>(false)
@@ -15,7 +15,9 @@ const useMain = () => {
     deleteUser,
     addUser,
     getBudget,
+    getExpenses,
     addBudget: _addBudget,
+    addExpense: _addExpense,
   } = mainStore
 
   const sharedStore = useSharedSore()
@@ -27,6 +29,7 @@ const useMain = () => {
       isPending.value = true
       getUser()
       getBudget()
+      getExpenses()
     } catch (err) {
       const e = err as Error
       error.value = e.message
@@ -88,7 +91,30 @@ const useMain = () => {
         name: data.name,
         amount: data.amount,
       }
-      await _addBudget(budget)
+      await _addBudget(budget).then(() => {
+        enableSnackbar('Orçamento criado com sucesso')
+      })
+    } catch (err) {
+      const e = err as Error
+      error.value = e.message
+      enableSnackbar(e.message)
+      console.log(e)
+    } finally {
+      isPending.value = false
+    }
+  }
+  const addExpense = async (data: ExpenseFormData) => {
+    try {
+      error.value = null
+      isPending.value = 'addExpense'
+      const expense: ExpenseFormData = {
+        name: data.name,
+        amount: data.amount,
+        budget_id: data.budget_id,
+      }
+      await _addExpense(expense).then(() => {
+        enableSnackbar('Despesa criada com sucesso')
+      })
     } catch (err) {
       const e = err as Error
       error.value = e.message
@@ -108,6 +134,7 @@ const useMain = () => {
     login,
     loadDashboard,
     addBudget,
+    addExpense,
   }
 }
 

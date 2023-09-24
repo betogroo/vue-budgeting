@@ -6,4 +6,13 @@ export interface Budget {
   color?: string
 }
 
-type BudgetFormData = Pick<Budget, 'name' | 'amount'>
+export interface Expense {
+  id?: string
+  name: string
+  amount: number
+  budget_id: Budget['id']
+  createdAt?: string
+}
+
+export type BudgetFormData = Pick<Budget, 'name' | 'amount'>
+export type ExpenseFormData = Pick<Expense, 'name' | 'amount' | 'budget_id'>
