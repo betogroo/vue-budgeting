@@ -38,6 +38,7 @@ const store = useMainStore()
         ></v-progress-linear>
       </v-col>
     </v-row>
+
     {{ store.spentByBudget(id) }}
   </v-card>
 </template>

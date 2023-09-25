@@ -4,6 +4,7 @@ import { useHelpers } from '@/shared/composables'
 import type { Budget, BudgetFormData, Expense, ExpenseFormData } from '../types'
 const { fetchData, deleteItem, delay, generateRandomColor } = useHelpers()
 import { computed, ref } from 'vue'
+import exp from 'constants'
 
 export const useMainStore = defineStore('main', () => {
   const userName = ref<string | null>(null)
@@ -25,9 +26,10 @@ export const useMainStore = defineStore('main', () => {
 
   const spentByBudget = computed(() => {
     return (budget_id: Budget['id']) => {
-      const data = expenses.value.filter(
-        (budget) => budget.budget_id === budget_id,
-      )
+      const data = expenses.value.reduce((acc, expense) => {
+        if (expense.budget_id !== budget_id) return acc
+        return (acc += expense.amount)
+      }, 0)
       return data
     }
   })
