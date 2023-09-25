@@ -9,15 +9,17 @@ defineProps<Props>()
 </script>
 
 <template>
-  <h1 class="text-left mb-2">
-    Seja bem vindo de volta,<span class="text-blue text-uppercase">
-      {{ ' ' + userName }}</span
-    >
-  </h1>
-  <div v-if="!budgets?.length">
-    <p class="text-justify">
-      Orçamento pessoal é o segredo para a liberdade financeira.
-    </p>
-    <p class="text-justify">Comece criando seu orçamento agora!</p>
+  <div>
+    <h1 class="text-left mb-2">
+      Seja bem vindo de volta,<span class="text-blue text-uppercase">
+        {{ ' ' + userName }}</span
+      >
+    </h1>
+    <div v-if="!budgets?.length">
+      <p class="text-justify">
+        Orçamento pessoal é o segredo para a liberdade financeira.
+      </p>
+      <p class="text-justify">Comece criando seu orçamento agora!</p>
+    </div>
   </div>
 </template>
