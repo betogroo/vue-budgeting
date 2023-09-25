@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { useHelpers } from '@/shared/composables'
 import type { Budget, BudgetFormData, Expense, ExpenseFormData } from '../types'
 const { fetchData, deleteItem, delay, generateRandomColor } = useHelpers()
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 export const useMainStore = defineStore('main', () => {
   const userName = ref<string | null>(null)
@@ -22,6 +22,15 @@ export const useMainStore = defineStore('main', () => {
     const data = fetchData('expenses')
     if (data) expenses.value = data
   }
+
+  const spentByBudget = computed(() => {
+    return (budget_id: Budget['id']) => {
+      const data = expenses.value.filter(
+        (budget) => budget.budget_id === budget_id,
+      )
+      return data
+    }
+  })
 
   const deleteUser = async () => {
     await delay()
@@ -67,5 +76,6 @@ export const useMainStore = defineStore('main', () => {
     addUser,
     addBudget,
     addExpense,
+    spentByBudget,
   }
 })

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { toRefs } from 'vue'
+import { useMainStore } from '../store/useMainStore'
 import type { Budget } from '../types'
 
 interface Props {
@@ -7,6 +8,8 @@ interface Props {
 }
 const props = defineProps<Props>()
 const { id, name, amount, color, createdAt } = toRefs(props.budget)
+
+const store = useMainStore()
 </script>
 
 <template>
@@ -35,5 +38,6 @@ const { id, name, amount, color, createdAt } = toRefs(props.budget)
         ></v-progress-linear>
       </v-col>
     </v-row>
+    {{ store.spentByBudget(id) }}
   </v-card>
 </template>
