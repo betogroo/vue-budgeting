@@ -23,66 +23,61 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <v-sheet
-    class="rounded-lg pa-1"
-    style="border: 2px dotted"
-  >
-    <v-sheet class="pa-1">
-      <div class="text-left text-subtitle-1 font-weight-black pa-1 mb-3">
-        Adicione seu Orçamento
-      </div>
-      <v-form
-        class="text-right"
-        @submit.prevent="handleSubmit"
+  <v-card-form>
+    <div class="text-left text-subtitle-1 font-weight-black pa-1 mb-3">
+      Adicione seu Orçamento
+    </div>
+    <v-form
+      class="text-right"
+      @submit.prevent="handleSubmit"
+    >
+      <v-row
+        class="my-3"
+        no-gutters
       >
-        <v-row
-          class="my-3"
-          no-gutters
+        <v-col
+          class="mb-3"
+          cols="12"
         >
-          <v-col
-            class="mb-3"
-            cols="12"
+          <v-text-field
+            ref="name"
+            v-model="formData.name"
+            density="compact"
+            hide-details
+            label="Nome do Orçamento"
+            placeholder="ex: Doces"
+            variant="outlined"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="12">
+          <v-text-field
+            v-model.number="formData.amount"
+            density="compact"
+            hide-details
+            label="Quantidade"
+            placeholder="ex: 1,98"
+            prefix="R$"
+            type="number"
+            variant="outlined"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row
+        class="my-3"
+        no-gutters
+      >
+        <v-col>
+          <v-btn
+            append-icon="mdi-currency-usd"
+            class="text-right"
+            color="black"
+            :disabled="!formData.name || !formData.amount ? true : false"
+            :loading="isPending === 'addBudget'"
+            type="submit"
+            >Cadastrar</v-btn
           >
-            <v-text-field
-              ref="name"
-              v-model="formData.name"
-              density="compact"
-              hide-details
-              label="Nome do Orçamento"
-              placeholder="ex: Doces"
-              variant="outlined"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              v-model.number="formData.amount"
-              density="compact"
-              hide-details
-              label="Quantidade"
-              placeholder="ex: 1,98"
-              prefix="R$"
-              type="number"
-              variant="outlined"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row
-          class="my-3"
-          no-gutters
-        >
-          <v-col>
-            <v-btn
-              append-icon="mdi-currency-usd"
-              class="text-right"
-              color="black"
-              :disabled="!formData.name || !formData.amount ? true : false"
-              :loading="isPending === 'addBudget'"
-              type="submit"
-              >Cadastrar</v-btn
-            >
-          </v-col>
-        </v-row>
-      </v-form>
-    </v-sheet>
-  </v-sheet>
+        </v-col>
+      </v-row>
+    </v-form>
+  </v-card-form>
 </template>
