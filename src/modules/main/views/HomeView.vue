@@ -4,6 +4,7 @@ import {
   IntroComponent,
   BudgetForm,
   ExpenseForm,
+  BudgetCard,
 } from '../components'
 import useMain from '../composables/useMain'
 const { userName, budgets, loadDashboard } = useMain()
@@ -14,7 +15,7 @@ loadDashboard()
     <v-responsive class="text-center">
       <template v-if="userName && Object.keys(userName).length">
         <v-row>
-          <v-col>
+          <v-col class="d-flex flex-row">
             <DashboardComponent
               :budgets="budgets"
               :user-name="userName"
@@ -33,6 +34,15 @@ loadDashboard()
             <ExpenseForm
               v-if="budgets.length"
               :budgets="budgets"
+            />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <BudgetCard
+              v-for="budget in budgets"
+              :key="budget.id"
+              :budget="budget"
             />
           </v-col>
         </v-row>

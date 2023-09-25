@@ -1,7 +1,7 @@
 import DashboardComponent from './DashboardComponent.vue'
 import UserForm from './UserForm.vue'
 import IntroComponent from './IntroComponent.vue'
-import BudgetComponent from './BudgetComponent.vue'
+import BudgetCard from './BudgetCard.vue'
 import BudgetForm from './BudgetForm.vue'
 import ExpenseForm from './ExpenseForm.vue'
 
@@ -11,5 +11,5 @@ export {
   IntroComponent,
   BudgetForm,
   ExpenseForm,
-  BudgetComponent,
+  BudgetCard,
 }
