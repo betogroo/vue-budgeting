@@ -21,8 +21,8 @@ import { UserForm } from '.'
           Orçamento pessoal é o segredo para a liberdade financeira. Comece sua
           jornada hoje!
         </p>
-        <UserForm />
       </v-sheet>
+      <UserForm />
     </v-col>
     <v-col>
       <v-img
