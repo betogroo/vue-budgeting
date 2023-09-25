@@ -17,14 +17,17 @@ const store = useMainStore()
     class="rounded-lg pa-1 mr-2 my-2"
     color="red"
     style="border: 2px solid"
-    variant="tonal"
+    variant="outlined"
   >
-    <v-row>
+    <v-row
+      align="center"
+      justify="center"
+    >
       <v-col cols="6">
         <v-card-title>{{ name }}</v-card-title>
       </v-col>
-      <v-col class="d-flex flex-column">
-        <span>R$ {{ amount }}</span> <span>orçamentado</span>
+      <v-col>
+        <span>R$ {{ amount }}</span>
       </v-col>
     </v-row>
     <v-row>
@@ -33,12 +36,14 @@ const store = useMainStore()
           color="red"
           :height="12"
           :max="amount"
-          model-value="250"
+          :model-value="store.spentByBudget(id)"
           rounded
         ></v-progress-linear>
       </v-col>
     </v-row>
-
-    {{ store.spentByBudget(id) }}
+    <v-row justify="space-between">
+      <v-col>{{ store.spentByBudget(id) }} gastos</v-col>
+      <v-col>{{ amount - store.spentByBudget(id) }} resantes</v-col>
+    </v-row>
   </v-card>
 </template>
