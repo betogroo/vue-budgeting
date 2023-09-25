@@ -11,7 +11,10 @@ const { userName, budgets, loadDashboard } = useMain()
 loadDashboard()
 </script>
 <template>
-  <v-container class="d-flex justify-center align-start fill-height">
+  <v-container
+    class="d-flex justify-center fill-height"
+    :class="userName ? 'align-baseline' : ''"
+  >
     <v-responsive class="text-center">
       <template v-if="userName && Object.keys(userName).length">
         <v-row>

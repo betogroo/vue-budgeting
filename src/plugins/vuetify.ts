@@ -10,9 +10,21 @@ import 'vuetify/styles'
 
 // Composables
 import { createVuetify } from 'vuetify'
+import { VCard } from 'vuetify/lib/components/index.mjs'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
+  aliases: {
+    VCardForm: VCard,
+  },
+  defaults: {
+    VCardForm: {
+      flat: true,
+      class: 'rounded-lg pa-2',
+      style: 'border: 2px dotted',
+      width: 375,
+    },
+  },
   theme: {
     themes: {
       light: {
