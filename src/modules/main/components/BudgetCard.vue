@@ -2,11 +2,14 @@
 import { toRefs } from 'vue'
 import { useMainStore } from '../store/useMainStore'
 import type { Budget } from '../types'
+import { useHelpers } from '@/shared/composables'
+const props = defineProps<Props>()
+
+const { localCurrency } = useHelpers()
 
 interface Props {
   budget: Budget
 }
-const props = defineProps<Props>()
 const { id, name, amount, color, createdAt } = toRefs(props.budget)
 
 const store = useMainStore()
@@ -27,7 +30,7 @@ const store = useMainStore()
         <v-card-title>{{ name }}</v-card-title>
       </v-col>
       <v-col>
-        <span>R$ {{ amount }}</span>
+        <span>{{ localCurrency(amount) }}</span>
       </v-col>
     </v-row>
     <v-row>
@@ -42,8 +45,10 @@ const store = useMainStore()
       </v-col>
     </v-row>
     <v-row justify="space-between">
-      <v-col>{{ store.spentByBudget(id) }} gastos</v-col>
-      <v-col>{{ amount - store.spentByBudget(id) }} resantes</v-col>
+      <v-col>{{ localCurrency(+store.spentByBudget(id)) }} gastos</v-col>
+      <v-col
+        >{{ localCurrency(amount - store.spentByBudget(id)) }} resantes</v-col
+      >
     </v-row>
   </v-card>
 </template>

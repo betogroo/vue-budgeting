@@ -26,7 +26,21 @@ const useHelpers = () => {
     return `${countBudgets * 34}, 65%, 50%`
   }
 
-  return { fetchData, existingData, deleteItem, delay, generateRandomColor }
+  const localCurrency = (data: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(data)
+  }
+
+  return {
+    fetchData,
+    existingData,
+    deleteItem,
+    delay,
+    generateRandomColor,
+    localCurrency,
+  }
 }
 
 export default useHelpers

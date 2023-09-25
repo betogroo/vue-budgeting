@@ -2,7 +2,8 @@
 import { defineStore } from 'pinia'
 import { useHelpers } from '@/shared/composables'
 import type { Budget, BudgetFormData, Expense, ExpenseFormData } from '../types'
-const { fetchData, deleteItem, delay, generateRandomColor } = useHelpers()
+const { fetchData, deleteItem, delay, generateRandomColor, localCurrency } =
+  useHelpers()
 import { computed, ref } from 'vue'
 import exp from 'constants'
 
