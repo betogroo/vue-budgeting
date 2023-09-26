@@ -33,6 +33,9 @@ const useHelpers = () => {
     }).format(data)
   }
 
+  const timestampToDate = (date: number) =>
+    new Date(date).toLocaleDateString('pt-BR')
+
   return {
     fetchData,
     existingData,
@@ -40,6 +43,7 @@ const useHelpers = () => {
     delay,
     generateRandomColor,
     localCurrency,
+    timestampToDate,
   }
 }
 
