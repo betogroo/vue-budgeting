@@ -4,6 +4,7 @@ import {
   IntroComponent,
   BudgetForm,
   ExpenseForm,
+  ExpensesTable,
   BudgetCard,
 } from '../components'
 import useMain from '../composables/useMain'
@@ -50,31 +51,9 @@ loadDashboard()
           </v-col>
         </v-row>
 
-        Beto
         <v-row
-          ><v-col>
-            <v-data-table
-              class="elevation-1"
-              :headers="[
-                {
-                  title: 'Nome',
-                  key: 'name',
-                },
-                {
-                  title: 'Valor',
-                  key: 'amount',
-                },
-                {
-                  title: 'Data',
-                  key: 'createdAt',
-                },
-              ]"
-              item-value="name"
-              :items="expenses"
-            ></v-data-table>
-          </v-col>
+          ><v-col><ExpensesTable :expenses="expenses" /></v-col>
         </v-row>
-        {{ expenses }}
       </template>
       <IntroComponent v-else />
     </v-responsive>
