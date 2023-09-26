@@ -2,10 +2,9 @@
 import { defineStore } from 'pinia'
 import { useHelpers } from '@/shared/composables'
 import type { Budget, BudgetFormData, Expense, ExpenseFormData } from '../types'
-const { fetchData, deleteItem, delay, generateRandomColor, localCurrency } =
+const { fetchData, deleteItem, delay, generateRandomColor, timestampToDate } =
   useHelpers()
 import { computed, ref } from 'vue'
-import exp from 'constants'
 
 export const useMainStore = defineStore('main', () => {
   const userName = ref<string | null>(null)
@@ -16,13 +15,27 @@ export const useMainStore = defineStore('main', () => {
     const data = fetchData('userName')
     if (data) userName.value = data
   }
-  const getBudget = async () => {
+  const getBudgets = async () => {
     const data = fetchData('budgets')
     if (data) budgets.value = data
   }
+
   const getExpenses = async () => {
-    const data = fetchData('expenses')
-    if (data) expenses.value = data
+    const data: Expense[] = fetchData('expenses')
+    if (data) {
+      const mapData: Expense[] = data.map((item) => {
+        return {
+          id: item.id,
+          name: item.name,
+          amount: item.amount,
+          budget_id: item.budget_id,
+          createdAt: item.createdAt,
+          formatDate: timestampToDate(+item.createdAt),
+        }
+      })
+      console.log(mapData)
+      expenses.value = mapData
+    }
   }
 
   const spentByBudget = computed(() => {
@@ -51,7 +64,7 @@ export const useMainStore = defineStore('main', () => {
     await delay()
     const newValue = {
       id: crypto.randomUUID(),
-      createdAt: Date.now().toString(),
+      createdAt: Date.now(),
       color: generateRandomColor(),
       ...data,
     }
@@ -62,7 +75,7 @@ export const useMainStore = defineStore('main', () => {
     await delay()
     const newValue = {
       id: crypto.randomUUID(),
-      createdAt: Date.now().toString(),
+      createdAt: Date.now(),
       ...data,
     }
     expenses.value.push(newValue)
@@ -73,7 +86,7 @@ export const useMainStore = defineStore('main', () => {
     budgets,
     expenses,
     getUser,
-    getBudget,
+    getBudgets,
     getExpenses,
     deleteUser,
     addUser,

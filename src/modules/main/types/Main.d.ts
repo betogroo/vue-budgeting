@@ -2,7 +2,7 @@ export interface Budget {
   id?: string
   name: string
   amount: number
-  createdAt?: string
+  createdAt?: string | number
   color?: string
 }
 
@@ -11,7 +11,7 @@ export interface Expense {
   name: string
   amount: number
   budget_id: Budget['id']
-  createdAt?: string
+  createdAt: string | number
 }
 
 export type BudgetFormData = Pick<Budget, 'name' | 'amount'>
