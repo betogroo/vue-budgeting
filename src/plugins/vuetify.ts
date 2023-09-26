@@ -22,6 +22,7 @@ export default createVuetify({
       flat: true,
       class: 'rounded-lg pa-2',
       style: 'border: 2px dotted',
+      width: '100%',
     },
   },
   theme: {

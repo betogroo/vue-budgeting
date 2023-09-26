@@ -21,6 +21,7 @@ const store = useMainStore()
     color="red"
     style="border: 2px solid"
     variant="outlined"
+    width="100%"
   >
     <v-row
       align="center"
