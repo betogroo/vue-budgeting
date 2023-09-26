@@ -7,7 +7,7 @@ import {
   BudgetCard,
 } from '../components'
 import useMain from '../composables/useMain'
-const { userName, budgets, loadDashboard } = useMain()
+const { userName, budgets, loadDashboard, expenses } = useMain()
 loadDashboard()
 </script>
 <template>
@@ -49,6 +49,32 @@ loadDashboard()
             />
           </v-col>
         </v-row>
+
+        Beto
+        <v-row
+          ><v-col>
+            <v-data-table
+              class="elevation-1"
+              :headers="[
+                {
+                  title: 'Nome',
+                  key: 'name',
+                },
+                {
+                  title: 'Valor',
+                  key: 'amount',
+                },
+                {
+                  title: 'Data',
+                  key: 'createdAt',
+                },
+              ]"
+              item-value="name"
+              :items="expenses"
+            ></v-data-table>
+          </v-col>
+        </v-row>
+        {{ expenses }}
       </template>
       <IntroComponent v-else />
     </v-responsive>
