@@ -42,14 +42,14 @@ const { userName, budgets, expenses } = useMain()
             />
           </v-col>
         </v-row>
-        <v-row>
+        <v-row dense>
           <v-col
             v-for="(budget, index) in budgets"
             :key="budget.id"
             cols="12"
             :sm="lastColumnGrid(budgets, index)"
           >
-            {{ `${index} - ${budgets.length}` }}<BudgetCard :budget="budget" />
+            <BudgetCard :budget="budget" />
           </v-col>
         </v-row>
 
