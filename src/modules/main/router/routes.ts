@@ -12,6 +12,15 @@ const routes: CustomRouteRecordRaw[] = [
     },
   },
   {
+    path: '/expenses',
+    component: () => import('../views/ExpensesView.vue'),
+    name: 'ExpensesView',
+    meta: {
+      title: 'Despesas',
+      requiresAuth: false,
+    },
+  },
+  {
     path: '/about',
     component: () => import('../views/AboutView.vue'),
     name: 'AboutView',
