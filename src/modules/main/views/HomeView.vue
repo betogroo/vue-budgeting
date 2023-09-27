@@ -8,6 +8,8 @@ import {
   BudgetCard,
 } from '../components'
 import useMain from '../composables/useMain'
+import { useHelpers } from '@/shared/composables'
+const { lastColumnGrid } = useHelpers()
 const { userName, budgets, loadDashboard, expenses } = useMain()
 loadDashboard()
 </script>
@@ -29,7 +31,7 @@ loadDashboard()
         <v-row>
           <v-col
             cols="12"
-            sm="6"
+            :sm="!budgets.length ? 8 : 6"
           >
             <BudgetForm />
           </v-col>
@@ -42,17 +44,22 @@ loadDashboard()
           </v-col>
         </v-row>
         <v-row>
-          <v-col>
-            <BudgetCard
-              v-for="budget in budgets"
-              :key="budget.id"
-              :budget="budget"
-            />
+          <v-col
+            v-for="(budget, index) in budgets"
+            :key="budget.id"
+            cols="12"
+            :sm="lastColumnGrid(budgets, index)"
+          >
+            {{ `${index} - ${budgets.length}` }}<BudgetCard :budget="budget" />
           </v-col>
         </v-row>
 
         <v-row
-          ><v-col><ExpensesTable :expenses="expenses" /></v-col>
+          ><v-col
+            ><ExpensesTable
+              v-if="expenses.length"
+              :expenses="expenses"
+          /></v-col>
         </v-row>
       </template>
       <IntroComponent v-else />
