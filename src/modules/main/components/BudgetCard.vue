@@ -18,9 +18,9 @@ const store = useMainStore()
 <template>
   <v-card
     class="rounded-lg pa-1 mr-2 my-2"
-    color="red"
+    :color="color"
     style="border: 2px solid"
-    variant="outlined"
+    variant="tonal"
     width="100%"
   >
     <v-row
@@ -37,7 +37,7 @@ const store = useMainStore()
     <v-row>
       <v-col class="mx-3">
         <v-progress-linear
-          color="red"
+          :color="color"
           :height="12"
           :max="amount"
           :model-value="store.spentByBudget(id)"
