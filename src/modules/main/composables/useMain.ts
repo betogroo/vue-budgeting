@@ -9,7 +9,7 @@ const isPending = ref<boolean | string>(false)
 
 const useMain = () => {
   const mainStore = useMainStore()
-  const { userName, budgets, expenses } = storeToRefs(mainStore)
+  const { userName, budgets, expenses, recentExpenses } = storeToRefs(mainStore)
   const {
     getUser,
     deleteUser,
@@ -136,6 +136,7 @@ const useMain = () => {
     userName,
     budgets,
     expenses,
+    recentExpenses,
     isPending,
     fetchUser,
     logout,

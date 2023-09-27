@@ -10,7 +10,7 @@ import {
 import useMain from '../composables/useMain'
 import { useHelpers } from '@/shared/composables'
 const { lastColumnGrid } = useHelpers()
-const { userName, budgets, expenses } = useMain()
+const { userName, budgets, expenses, recentExpenses } = useMain()
 </script>
 <template>
   <v-container
@@ -57,7 +57,7 @@ const { userName, budgets, expenses } = useMain()
           ><v-col
             ><ExpensesTable
               v-if="expenses.length"
-              :expenses="expenses"
+              :expenses="recentExpenses"
           /></v-col>
         </v-row>
       </template>

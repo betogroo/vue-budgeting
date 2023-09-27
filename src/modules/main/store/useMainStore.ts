@@ -36,6 +36,12 @@ export const useMainStore = defineStore('main', () => {
       expenses.value = mapData
     }
   }
+  const recentExpenses = computed(() => {
+    const sortedExpenses: Expense[] = expenses.value.sort(
+      (a, b) => +b.createdAt - +a.createdAt,
+    )
+    return sortedExpenses.slice(0, 5)
+  })
 
   const spentByBudget = computed(() => {
     return (budget_id: Budget['id']) => {
@@ -92,5 +98,6 @@ export const useMainStore = defineStore('main', () => {
     addBudget,
     addExpense,
     spentByBudget,
+    recentExpenses,
   }
 })
