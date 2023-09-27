@@ -53,8 +53,10 @@ const { userName, budgets, expenses, recentExpenses } = useMain()
           </v-col>
         </v-row>
 
-        <v-row
-          ><v-col v-if="recentExpenses.length"
+        <v-row dense
+          ><v-col
+            v-if="recentExpenses.length"
+            cols="12"
             ><div class="text-h5 text-left font-weight-bold">
               <span>Despesas recentes</span>
               <span class="text-subtitle-2">{{
@@ -63,6 +65,15 @@ const { userName, budgets, expenses, recentExpenses } = useMain()
             </div>
             <ExpensesTable :expenses="recentExpenses"
           /></v-col>
+          <v-col class="text-right">
+            <v-btn
+              v-if="expenses.length > 5"
+              append-icon="mdi-table-eye"
+              color="black"
+              :to="{ name: 'ExpensesView' }"
+              >ver todas as despesas</v-btn
+            >
+          </v-col>
         </v-row>
       </template>
       <IntroComponent v-else />
