@@ -22,8 +22,20 @@ const useHelpers = () => {
   }
 
   const generateRandomColor = () => {
-    const countBudgets = fetchData('budgets')?.length ?? 0
-    return `${countBudgets * 34}, 65%, 50%`
+    const o = Math.round,
+      r = Math.random,
+      s = 255
+    return (
+      'rgba(' +
+      o(r() * s) +
+      ',' +
+      o(r() * s) +
+      ',' +
+      o(r() * s) +
+      ',' +
+      0.9 +
+      ')'
+    )
   }
 
   const localCurrency = (data: number) => {
