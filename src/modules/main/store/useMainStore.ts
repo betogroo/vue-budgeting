@@ -57,6 +57,10 @@ export const useMainStore = defineStore('main', () => {
     await delay()
     deleteItem('userName')
     userName.value = null
+    deleteItem('budgets')
+    budgets.value = []
+    deleteItem('expenses')
+    expenses.value = []
   }
 
   const addUser = async (data: string) => {
