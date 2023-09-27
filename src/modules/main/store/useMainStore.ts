@@ -33,7 +33,6 @@ export const useMainStore = defineStore('main', () => {
           formatDate: timestampToDate(+item.createdAt),
         }
       })
-      console.log(mapData)
       expenses.value = mapData
     }
   }
