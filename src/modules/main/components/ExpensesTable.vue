@@ -61,7 +61,7 @@ const deleteExpense = (id: Expense['id']) => {
           <v-chip
             :color="getBudget(item.budget_id)?.color"
             :density="'compact'"
-            @click="goToBudget(item.budget_id)"
+            :to="{ name: 'BudgetView', params: { id: item.budget_id } }"
             >{{ getBudget(item.budget_id)?.name }}</v-chip
           >
         </td>
