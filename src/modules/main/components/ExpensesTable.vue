@@ -21,10 +21,6 @@ const deleteExpense = (id: Expense['id']) => {
 </script>
 
 <template>
-  <div class="text-h5 text-left font-weight-bold">
-    <span>Despesas recentes</span>
-    <span class="text-subtitle-2">{{ ` (${expenses.length} total)` }}</span>
-  </div>
   <v-data-table
     class="elevation-1"
     density="compact"
