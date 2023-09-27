@@ -45,7 +45,10 @@ const store = useMainStore()
         ></v-progress-linear>
       </v-col>
     </v-row>
-    <v-row justify="space-between">
+    <v-row
+      align="center"
+      justify="space-between"
+    >
       <v-col>{{ localCurrency(+store.spentByBudget(id)) }} gastos</v-col>
       <v-col
         >{{ localCurrency(amount - store.spentByBudget(id)) }} resantes</v-col
