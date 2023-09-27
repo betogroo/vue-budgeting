@@ -4,6 +4,7 @@ import IntroComponent from './IntroComponent.vue'
 import BudgetCard from './BudgetCard.vue'
 import BudgetForm from './BudgetForm.vue'
 import ExpenseForm from './ExpenseForm.vue'
+import ExpensesTable from './ExpensesTable.vue'
 
 export {
   DashboardComponent,
@@ -12,4 +13,5 @@ export {
   BudgetForm,
   ExpenseForm,
   BudgetCard,
+  ExpensesTable,
 }

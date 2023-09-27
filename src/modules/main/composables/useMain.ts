@@ -2,19 +2,19 @@ import { ref } from 'vue'
 import { useMainStore } from '../store/useMainStore'
 import { useSharedSore } from '@/shared/store'
 import { storeToRefs } from 'pinia'
-import type { BudgetFormData, ExpenseFormData } from '../types'
+import type { BudgetFormData, ExpenseFormData, Budget } from '../types'
 
 const error = ref()
 const isPending = ref<boolean | string>(false)
 
 const useMain = () => {
   const mainStore = useMainStore()
-  const { userName, budgets } = storeToRefs(mainStore)
+  const { userName, budgets, expenses } = storeToRefs(mainStore)
   const {
     getUser,
     deleteUser,
     addUser,
-    getBudget,
+    getBudgets,
     getExpenses,
     addBudget: _addBudget,
     addExpense: _addExpense,
@@ -28,7 +28,7 @@ const useMain = () => {
       error.value = null
       isPending.value = true
       await getUser()
-      await getBudget()
+      await getBudgets()
       await getExpenses()
     } catch (err) {
       const e = err as Error
@@ -103,6 +103,13 @@ const useMain = () => {
       isPending.value = false
     }
   }
+
+  const getBudget = (budget_id: Budget['id']) => {
+    const data: Budget | undefined = budgets.value.find(
+      (budget) => budget.id === budget_id,
+    )
+    return data
+  }
   const addExpense = async (data: ExpenseFormData) => {
     try {
       error.value = null
@@ -128,6 +135,7 @@ const useMain = () => {
   return {
     userName,
     budgets,
+    expenses,
     isPending,
     fetchUser,
     logout,
@@ -135,6 +143,7 @@ const useMain = () => {
     loadDashboard,
     addBudget,
     addExpense,
+    getBudget,
   }
 }
 

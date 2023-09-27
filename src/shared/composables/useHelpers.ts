@@ -33,6 +33,13 @@ const useHelpers = () => {
     }).format(data)
   }
 
+  const lastColumnGrid = <T>(item: T[], index: number) => {
+    return item.length % 2 !== 0 && index === item.length - 1 ? 12 : 6
+  }
+
+  const timestampToDate = (date: number) =>
+    new Date(date).toLocaleDateString('pt-BR')
+
   return {
     fetchData,
     existingData,
@@ -40,6 +47,8 @@ const useHelpers = () => {
     delay,
     generateRandomColor,
     localCurrency,
+    timestampToDate,
+    lastColumnGrid,
   }
 }
 

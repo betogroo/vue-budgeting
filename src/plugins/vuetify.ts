@@ -11,9 +11,19 @@ import 'vuetify/styles'
 // Composables
 import { createVuetify } from 'vuetify'
 import { VCard } from 'vuetify/lib/components/index.mjs'
+import {
+  VDataTable,
+  VDataTableServer,
+  VDataTableVirtual,
+} from 'vuetify/labs/VDataTable'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
+  components: {
+    VDataTable,
+    VDataTableServer,
+    VDataTableVirtual,
+  },
   aliases: {
     VCardForm: VCard,
   },
@@ -22,6 +32,7 @@ export default createVuetify({
       flat: true,
       class: 'rounded-lg pa-2',
       style: 'border: 2px dotted',
+      width: '100%',
     },
   },
   theme: {
