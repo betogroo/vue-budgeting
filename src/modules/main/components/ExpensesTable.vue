@@ -58,21 +58,21 @@ const deleteExpense = (id: Expense['id']) => {
   >
     <template v-slot:item="{ item }">
       <tr class="text-left">
-        <td>{{ item.columns.name }}</td>
-        <td>{{ localCurrency(item.columns.amount) }}</td>
-        <td>{{ timestampToDate(item.columns.createdAt) }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ localCurrency(item.amount) }}</td>
+        <td>{{ timestampToDate(item.createdAt) }}</td>
         <td class="text-center">
           <v-chip
-            :color="getBudget(item.columns.budget_id)?.color"
+            :color="getBudget(item.budget_id)?.color"
             :density="'compact'"
-            @click="goToBudget(item.columns.budget_id)"
-            >{{ getBudget(item.columns.budget_id)?.name }}</v-chip
+            @click="goToBudget(item.budget_id)"
+            >{{ getBudget(item.budget_id)?.name }}</v-chip
           >
         </td>
         <td>
           <v-icon
             color="red"
-            @click="deleteExpense(item.columns.id)"
+            @click="deleteExpense(item.id)"
             >mdi-delete</v-icon
           >
         </td>
