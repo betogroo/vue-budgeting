@@ -10,8 +10,7 @@ import {
 import useMain from '../composables/useMain'
 import { useHelpers } from '@/shared/composables'
 const { lastColumnGrid } = useHelpers()
-const { userName, budgets, loadDashboard, expenses } = useMain()
-loadDashboard()
+const { userName, budgets, expenses } = useMain()
 </script>
 <template>
   <v-container
