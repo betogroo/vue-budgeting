@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { useMainStore } from '../store/useMainStore'
 import { useSharedSore } from '@/shared/store'
 import { storeToRefs } from 'pinia'
-import type { BudgetFormData, ExpenseFormData, Budget } from '../types'
+import type { BudgetFormData, ExpenseFormData, Budget, Expense } from '../types'
 
 const error = ref()
 const isPending = ref<boolean | string>(false)
@@ -18,6 +18,7 @@ const useMain = () => {
     getExpenses,
     addBudget: _addBudget,
     addExpense: _addExpense,
+    deleteExpense: _deleteExpense,
   } = mainStore
 
   const sharedStore = useSharedSore()
@@ -62,6 +63,21 @@ const useMain = () => {
     } catch (err) {
       const e = err as Error
       error.value = e.message
+      console.log(e)
+    } finally {
+      isPending.value = false
+    }
+  }
+  const deleteExpense = async (id: Expense['id']) => {
+    try {
+      error.value = null
+      isPending.value = 'deleteExpense'
+      await _deleteExpense(id)
+      enableSnackbar('Despesa excluída com sucesso!')
+    } catch (err) {
+      const e = err as Error
+      error.value = e.message
+      enableSnackbar(e.message)
       console.log(e)
     } finally {
       isPending.value = false
@@ -140,6 +156,7 @@ const useMain = () => {
     isPending,
     fetchUser,
     logout,
+    deleteExpense,
     login,
     loadDashboard,
     addBudget,

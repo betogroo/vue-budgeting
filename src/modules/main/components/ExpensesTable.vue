@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Budget, Expense } from '../types'
 import { useHelpers } from '@/shared/composables'
-import { toRefs } from 'vue'
+import { ref, toRefs } from 'vue'
 import { useMain } from '../composables'
 const props = defineProps<Props>()
 interface Props {
@@ -9,14 +9,17 @@ interface Props {
 }
 const { expenses } = toRefs(props)
 
-const { getBudget } = useMain()
+const rowLoading = ref(-1)
+
+const { getBudget, deleteExpense, isPending } = useMain()
 const { localCurrency, timestampToDate } = useHelpers()
 
 const goToBudget = (id: Budget['id']) => {
   console.log(id)
 }
-const deleteExpense = (id: Expense['id']) => {
-  console.log(id)
+const handleDelete = async (id: string, index: number) => {
+  rowLoading.value = index
+  deleteExpense(id)
 }
 </script>
 
@@ -52,7 +55,7 @@ const deleteExpense = (id: Expense['id']) => {
     :sort-by="[{ key: 'createdAt', order: 'desc' }]"
     sort-desc-icon="mdi-sort-descending"
   >
-    <template v-slot:item="{ item }">
+    <template v-slot:item="{ item, index }">
       <tr class="text-left">
         <td>{{ item.name }}</td>
         <td>{{ localCurrency(item.amount) }}</td>
@@ -66,11 +69,13 @@ const deleteExpense = (id: Expense['id']) => {
           >
         </td>
         <td>
-          <v-icon
+          <v-btn
             color="red"
-            @click="deleteExpense(item.id)"
-            >mdi-delete</v-icon
-          >
+            icon="mdi-delete"
+            :loading="isPending === 'deleteExpense' && rowLoading === index"
+            variant="text"
+            @click="handleDelete(item.id, index)"
+          />
         </td>
       </tr>
     </template>
