@@ -65,13 +65,10 @@ const { userName, budgets, expenses, recentExpenses } = useMain()
           ><v-col
             v-if="recentExpenses.length"
             cols="12"
-            ><div class="text-h5 text-left font-weight-bold">
-              <span>Despesas recentes</span>
-              <span class="text-subtitle-2">{{
-                ` (${recentExpenses.length} total)`
-              }}</span>
-            </div>
-            <ExpensesTable :expenses="recentExpenses"
+          >
+            <ExpensesTable
+              :expenses="recentExpenses"
+              header-addiction="recentes"
           /></v-col>
           <v-col class="text-right">
             <v-btn
