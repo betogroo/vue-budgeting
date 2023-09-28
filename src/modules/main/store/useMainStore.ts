@@ -43,6 +43,16 @@ export const useMainStore = defineStore('main', () => {
     return sortedExpenses.slice(0, 5)
   })
 
+  const expensesByBudgetId = computed(() => {
+    return (budget_id: Budget['id']) => {
+      const data = expenses.value.filter(
+        (expense) => expense.budget_id === budget_id,
+      )
+      console.log(data)
+      return data
+    }
+  })
+
   const spentByBudget = computed(() => {
     return (budget_id: Budget['id']) => {
       const data = expenses.value.reduce((acc, expense) => {
@@ -103,5 +113,6 @@ export const useMainStore = defineStore('main', () => {
     addExpense,
     spentByBudget,
     recentExpenses,
+    expensesByBudgetId,
   }
 })

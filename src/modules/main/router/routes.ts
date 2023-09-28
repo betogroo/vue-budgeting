@@ -21,6 +21,16 @@ const routes: CustomRouteRecordRaw[] = [
     },
   },
   {
+    path: '/budget/:id',
+    component: () => import('../views/BudgetView.vue'),
+    name: 'BudgetView',
+    props: (route) => ({ id: route.params.id }),
+    meta: {
+      title: 'Orçamento',
+      requiresAuth: false,
+    },
+  },
+  {
     path: '/about',
     component: () => import('../views/AboutView.vue'),
     name: 'AboutView',

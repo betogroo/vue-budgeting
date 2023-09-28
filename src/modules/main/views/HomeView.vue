@@ -43,7 +43,10 @@ const { userName, budgets, expenses, recentExpenses } = useMain()
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col cols="12">
+          <v-col
+            v-if="budgets.length"
+            cols="12"
+          >
             <div class="text-h5 text-left font-weight-bold">
               <span>Orçamentos Cadastrados</span>
             </div>
