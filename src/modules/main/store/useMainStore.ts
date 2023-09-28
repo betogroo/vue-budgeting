@@ -73,6 +73,15 @@ export const useMainStore = defineStore('main', () => {
     expenses.value = []
   }
 
+  const deleteExpense = async (id: Expense['id']) => {
+    await delay()
+    const data: Expense[] = fetchData('expenses')
+    const newValue = data.filter((expense) => expense.id !== id)
+    expenses.value = newValue
+    localStorage.setItem('expenses', JSON.stringify(expenses.value))
+    console.log(id, data)
+  }
+
   const addUser = async (data: string) => {
     await delay()
     localStorage.setItem('userName', JSON.stringify(data))
@@ -108,6 +117,7 @@ export const useMainStore = defineStore('main', () => {
     getBudgets,
     getExpenses,
     deleteUser,
+    deleteExpense,
     addUser,
     addBudget,
     addExpense,
