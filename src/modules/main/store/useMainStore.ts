@@ -82,6 +82,37 @@ export const useMainStore = defineStore('main', () => {
     console.log(id, data)
   }
 
+  const deleteBudget = async (id: string) => {
+    const existingBudgets: Budget[] = fetchData('budgets')
+    const existingExpenses: Expense[] = fetchData('expenses')
+
+    if (existingBudgets.length === 1) {
+      await delay(500, 'deleting all')
+      deleteItem('budgets')
+      deleteItem('expenses')
+      console.log('Vai retornar')
+      budgets.value = []
+      if (existingExpenses) expenses.value = []
+      return
+    }
+
+    console.log('passou direto')
+
+    const newBudgets = existingBudgets.filter((budget) => budget.id !== id)
+
+    await delay(500, 'deleting budgets')
+    budgets.value = newBudgets
+    localStorage.setItem('budgets', JSON.stringify(budgets.value))
+    await delay(500, 'deleting expenses')
+    if (existingExpenses && existingExpenses.length) {
+      const newExpenses = existingExpenses.filter(
+        (expense) => expense.budget_id !== id,
+      )
+      expenses.value = newExpenses
+      localStorage.setItem('expenses', JSON.stringify(expenses.value))
+    }
+  }
+
   const addUser = async (data: string) => {
     await delay()
     localStorage.setItem('userName', JSON.stringify(data))
@@ -118,6 +149,7 @@ export const useMainStore = defineStore('main', () => {
     getExpenses,
     deleteUser,
     deleteExpense,
+    deleteBudget,
     addUser,
     addBudget,
     addExpense,

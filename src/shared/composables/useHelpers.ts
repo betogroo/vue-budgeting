@@ -14,9 +14,12 @@ const useHelpers = () => {
     return localStorage.removeItem(key)
   }
 
-  const delay = (amount = 800, msg = false): Promise<void> => {
+  const delay = (
+    amount = 800,
+    msg: boolean | string = false,
+  ): Promise<void> => {
     if (msg) {
-      console.log(`Delay de ${amount / 1000} segundos para testes!`)
+      console.log(msg)
     }
     return new Promise((resolve) => setTimeout(resolve, amount))
   }
