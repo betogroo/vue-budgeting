@@ -92,23 +92,25 @@ export const useMainStore = defineStore('main', () => {
       deleteItem('expenses')
       console.log('Vai retornar')
       budgets.value = []
-      expenses.value = []
+      if (existingExpenses) expenses.value = []
       return
     }
 
     console.log('passou direto')
 
     const newBudgets = existingBudgets.filter((budget) => budget.id !== id)
-    const newExpenses = existingExpenses.filter(
-      (expense) => expense.budget_id !== id,
-    )
 
     await delay(500, 'deleting budgets')
     budgets.value = newBudgets
     localStorage.setItem('budgets', JSON.stringify(budgets.value))
     await delay(500, 'deleting expenses')
-    expenses.value = newExpenses
-    localStorage.setItem('expenses', JSON.stringify(expenses.value))
+    if (existingExpenses && existingExpenses.length) {
+      const newExpenses = existingExpenses.filter(
+        (expense) => expense.budget_id !== id,
+      )
+      expenses.value = newExpenses
+      localStorage.setItem('expenses', JSON.stringify(expenses.value))
+    }
   }
 
   const addUser = async (data: string) => {
