@@ -8,9 +8,15 @@ import {
   BudgetCard,
 } from '../components'
 import useMain from '../composables/useMain'
+import { useRouter } from 'vue-router'
 import { useHelpers } from '@/shared/composables'
 const { lastColumnGrid } = useHelpers()
 const { userName, budgets, expenses, recentExpenses } = useMain()
+const router = useRouter()
+
+const goToBudget = (id: string) => {
+  router.push({ name: 'BudgetView', params: { id: id } })
+}
 </script>
 <template>
   <v-container
@@ -57,7 +63,10 @@ const { userName, budgets, expenses, recentExpenses } = useMain()
             cols="12"
             :sm="lastColumnGrid(budgets, index)"
           >
-            <BudgetCard :budget="budget" />
+            <BudgetCard
+              :budget="budget"
+              @card-button="goToBudget(budget.id)"
+            />
           </v-col>
         </v-row>
 

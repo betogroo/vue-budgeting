@@ -5,14 +5,23 @@ import type { Budget } from '../types'
 import { useHelpers } from '@/shared/composables'
 const props = defineProps<Props>()
 
+const $emit = defineEmits<{
+  cardButton: [id: string]
+}>()
+
 const { localCurrency } = useHelpers()
 
 interface Props {
   budget: Budget
+  deleteButton?: boolean
 }
 const { id, name, amount, color, createdAt } = toRefs(props.budget)
 
 const store = useMainStore()
+
+const handleClick = () => {
+  $emit('cardButton', id?.value)
+}
 </script>
 
 <template>
@@ -49,9 +58,30 @@ const store = useMainStore()
       align="center"
       justify="space-between"
     >
-      <v-col>{{ localCurrency(+store.spentByBudget(id)) }} gastos</v-col>
       <v-col
-        >{{ localCurrency(amount - store.spentByBudget(id)) }} resantes</v-col
+        ><small
+          >{{ localCurrency(+store.spentByBudget(id)) }} gastos</small
+        ></v-col
+      >
+      <v-col
+        ><small
+          >{{
+            localCurrency(amount - store.spentByBudget(id))
+          }}
+          restantes</small
+        ></v-col
+      >
+      <v-col
+        cols="12"
+        sm="6"
+        ><v-btn
+          append-icon="mdi-archive-eye"
+          :color="deleteButton ? 'red' : budget.color"
+          variant="outlined"
+          @Click="handleClick"
+        >
+          {{ deleteButton ? 'Excluir Orçamento' : 'Ver Orçamento' }}
+        </v-btn></v-col
       >
     </v-row>
   </v-card>
