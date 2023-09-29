@@ -14,6 +14,7 @@ const { localCurrency } = useHelpers()
 interface Props {
   budget: Budget
   deleteButton?: boolean
+  isPending?: string | boolean
 }
 const { id, name, amount, color, createdAt } = toRefs(props.budget)
 
@@ -77,6 +78,7 @@ const handleClick = () => {
         ><v-btn
           append-icon="mdi-archive-eye"
           :color="deleteButton ? 'red' : budget.color"
+          :loading="isPending === 'deleteBudget'"
           variant="outlined"
           @Click="handleClick"
         >

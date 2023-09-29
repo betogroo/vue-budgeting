@@ -19,6 +19,7 @@ const useMain = () => {
     addBudget: _addBudget,
     addExpense: _addExpense,
     deleteExpense: _deleteExpense,
+    deleteBudget: _deleteBudget,
   } = mainStore
 
   const sharedStore = useSharedSore()
@@ -74,6 +75,21 @@ const useMain = () => {
       isPending.value = 'deleteExpense'
       await _deleteExpense(id)
       enableSnackbar('Despesa excluída com sucesso!')
+    } catch (err) {
+      const e = err as Error
+      error.value = e.message
+      enableSnackbar(e.message)
+      console.log(e)
+    } finally {
+      isPending.value = false
+    }
+  }
+  const deleteBudget = async (id: string) => {
+    try {
+      error.value = null
+      isPending.value = 'deleteBudget'
+      await _deleteBudget(id)
+      enableSnackbar('Orçamento excluído com sucesso!')
     } catch (err) {
       const e = err as Error
       error.value = e.message
@@ -157,6 +173,7 @@ const useMain = () => {
     fetchUser,
     logout,
     deleteExpense,
+    deleteBudget,
     login,
     loadDashboard,
     addBudget,

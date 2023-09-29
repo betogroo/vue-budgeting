@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useMain } from '../composables'
 import { useMainStore } from '../store/useMainStore'
 import { ExpensesTable, BudgetCard, ExpenseForm } from '../components'
@@ -9,10 +10,13 @@ interface Props {
 }
 const store = useMainStore()
 const { expensesByBudgetId, budgets } = store
-const { getBudget } = useMain()
+const { getBudget, deleteBudget, isPending } = useMain()
+const router = useRouter()
 const budget = ref(getBudget(props.id))
-const handleDelete = (id: string) => {
-  console.log(id)
+const handleDelete = async (id: string) => {
+  await deleteBudget(id).then(() => {
+    router.push({ name: 'HomeView' })
+  })
 }
 </script>
 
@@ -34,6 +38,7 @@ const handleDelete = (id: string) => {
             v-if="budget"
             :budget="budget"
             :delete-button="true"
+            :is-pending="isPending"
             @card-button="handleDelete(budget.id)"
           />
         </v-col>
