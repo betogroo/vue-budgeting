@@ -29,7 +29,7 @@ const handleDelete = async (id: string, index: number) => {
   </template>
   <template v-else>
     <div class="text-h5 text-left font-weight-bold">
-      <span>{{ `Despesas ${headerAddiction ? headerAddiction : ''}` }}</span>
+      <span>{{ `Despesas em ${headerAddiction ? headerAddiction : ''}` }}</span>
 
       <span class="text-subtitle-2">{{ ` (${expenses.length} total)` }}</span>
     </div>
