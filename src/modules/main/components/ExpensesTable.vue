@@ -67,7 +67,7 @@ const handleDelete = async (id: string, index: number) => {
         <tr class="text-left">
           <td>{{ item.name }}</td>
           <td>{{ localCurrency(item.amount) }}</td>
-          <td>{{ timestampToDate(item.createdAt) }}</td>
+          <td>{{ timestampToDate(+item.createdAt) }}</td>
           <td class="text-center">
             <v-chip
               :color="getBudget(item.budget_id)?.color"
@@ -82,7 +82,7 @@ const handleDelete = async (id: string, index: number) => {
               icon="mdi-delete"
               :loading="isPending === 'deleteExpense' && rowLoading === index"
               variant="text"
-              @click="handleDelete(item.id, index)"
+              @click="handleDelete(item.id!, index)"
             />
           </td>
         </tr>

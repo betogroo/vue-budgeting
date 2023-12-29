@@ -16,7 +16,7 @@ interface Props {
   deleteButton?: boolean
   isPending?: string | boolean
 }
-const { id, name, amount, color, createdAt } = toRefs(props.budget)
+const { id, name, amount, color } = toRefs(props.budget)
 
 const store = useMainStore()
 
