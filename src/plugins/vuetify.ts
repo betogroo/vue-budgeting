@@ -10,12 +10,12 @@ import 'vuetify/styles'
 
 // Composables
 import { createVuetify } from 'vuetify'
-import { VCard } from 'vuetify/lib/components/index.mjs'
 import {
+  VCard,
   VDataTable,
-  VDataTableServer,
   VDataTableVirtual,
-} from 'vuetify/labs/VDataTable'
+  VDataTableServer,
+} from 'vuetify/lib/components/index.mjs'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
